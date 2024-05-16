@@ -1,5 +1,6 @@
  import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
 
+ // App state that tracks current page and matched books
  const app = {
     page: 1,
     books: books,
@@ -8,7 +9,7 @@
     matches: books
 }
 
-// Function to render book list
+// Function to render book list of book previews
 function renderBookList(books, container) {
     const fragment = document.createDocumentFragment();
     for (const { author, id, image, title } of books) {
@@ -27,7 +28,7 @@ function renderBookList(books, container) {
     container.appendChild(fragment);
 }
 
-// Function to create dropdown options
+// Function to create dropdown options for genres and authors
 function createDropdownOptions(data, container, defaultOption) {
     const fragment = document.createDocumentFragment();
     const firstElement = document.createElement('option');
@@ -43,7 +44,7 @@ function createDropdownOptions(data, container, defaultOption) {
     container.appendChild(fragment);
 }
 
-// Function to apply theme
+// Function to apply selected theme
 function applyTheme(theme) {
     if (theme === 'night') {
         document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
@@ -54,12 +55,14 @@ function applyTheme(theme) {
     }
 }
 
-// Function to setup event listeners
+// Function to setup event listeners for various user interactions
 function setupEventListeners() {
+    //Close search overlay
     document.querySelector('[data-search-cancel]').addEventListener('click', () => {
         document.querySelector('[data-search-overlay]').open = false;
     });
-
+     
+    // Close search overlay
     document.querySelector('[data-settings-cancel]').addEventListener('click', () => {
         document.querySelector('[data-settings-overlay]').open = false;
     });
@@ -77,6 +80,7 @@ function setupEventListeners() {
         document.querySelector('[data-list-active]').open = false;
     });
 
+     //Handles theme change from settings
     document.querySelector('[data-settings-form]').addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -101,7 +105,7 @@ function setupEventListeners() {
     });
 }
 
-// Function to filter books
+// Function to filter books based on user input
 function filterBooks(filters) {
     const result = [];
     for (const book of app.books) {
@@ -123,7 +127,7 @@ function filterBooks(filters) {
     updateBookList(result);
 }
 
-// Function to show book details
+// Function shows detailed information about a book
 function showBookDetails(event) {
     const pathArray = Array.from(event.path || event.composedPath());
     let active = null;
@@ -168,7 +172,7 @@ function updateBookList(books) {
     document.querySelector('[data-search-overlay]').open = false;
 }
 
-// Function to load more books
+// Function to load more books when "Show more" button is clicked
 function loadMoreBooks() {
     const fragment = document.createDocumentFragment();
     const start = app.page * BOOKS_PER_PAGE;
@@ -178,7 +182,7 @@ function loadMoreBooks() {
     app.page += 1;
 }
 
-// Initial render
+// Initial render and event listener setup
 document.addEventListener('DOMContentLoaded', () => {
     const listContainer = document.querySelector('[data-list-items]');
     renderBookList(app.books.slice(0, BOOKS_PER_PAGE), listContainer);
