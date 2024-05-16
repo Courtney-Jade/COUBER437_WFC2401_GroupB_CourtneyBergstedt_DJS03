@@ -6,8 +6,7 @@ const app = {
     genres: genres,
     matches: books,
 }
- 
- const starting = document.createDocumentFragment()
+
  
 function renderBookList(books, container) {
     const fragment = document.createDocumentFragment();
