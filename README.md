@@ -15,14 +15,13 @@ The original structure of the code was repetitive. The theme application logic w
 6. **Adherence to Styleguides**: Ensure your code follows JavaScript and HTML coding standards and best practices for readability and maintainability.
 
 ## Changes Made
-1. Introduced the 'app' object to manage application state.
-2. Abstracted book list rendering into 'renderBookList'.
-3. Abstracted dropdown creation into 'createDropdownOptions'.
-4. Consolidated event listener setup into setupEventListeners.
-5. Encapsulated theme application logic into applyTheme.
-6. Centralized book filtering logic in filterBooks.
-7. Encapsulated book detail display in showBookDetails.
-
+1. Introduced the 'app' object to manage application state. Line 4
+2. Abstracted book list rendering into 'renderBookList'. Line 13
+3. Abstracted dropdown creation into 'createDropdownOptions'. Line 32
+4. Consolidated event listener setup into setupEventListeners. Line 59
+5. Encapsulated theme application logic into applyTheme. Line 48
+6. Centralized book filtering logic in filterBooks. Line 109
+7. Encapsulated book detail display in showBookDetails. Line 131
 
 ### Challenges
 The challenges I found was identifying all the repetitive code patterns and decide on how to incorporate abstraction into the code by refactoring it.I also had to make sure that when refactoring the code that the app was still functional.
